@@ -3,9 +3,13 @@
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
-	ui(new Ui::MainWindow)
+	ui(new Ui::MainWindow),
+	scene(new Scene),
+	netCtrlr(new NetworkController)
 {
 	ui->setupUi(this);
+
+	ui->graphicsView->setScene(scene);
 }
 
 MainWindow::~MainWindow()
