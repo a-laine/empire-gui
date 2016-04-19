@@ -7,7 +7,4 @@
 Scene::Scene(QObject *parent) : QGraphicsScene(parent)
 {
 	setBackgroundBrush(QBrush(Qt::black));
-
-	addItem(new Hexagon);
-	addItem(new Unit);
 }

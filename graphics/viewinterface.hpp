@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QColor>
 #include <QGraphicsScene>
+#include <QPointF>
 #include "hexagon.hpp"
 #include "unit.hpp"
 
@@ -12,17 +13,30 @@ class ViewInterface : public QObject
 {
 		Q_OBJECT
 	public:
-		explicit ViewInterface(QObject *parent = 0);
+		enum Orientation {
+			HORIZONTAL,
+			VERTICAL
+		};
 
-		void setScene(QGraphicsScene *s);
-		Hexagon* createHexagon(int x, int y);
+
+		explicit ViewInterface(QGraphicsScene *parent = 0);
+
+		void setMapSize(int x, int y, Orientation orientation);
+		Hexagon* createHexagon(int x, int y, Hexagon::Type type);
 		Unit* createUnit(int x, int y, QColor color);
+		void move(Unit* unit, int x, int y);
+		void remove(Unit* unit);
+		void remove(Hexagon* hexagon);
 
 	signals:
 
 	public slots:
 
 	private:
+		static QPointF toGraphicsCoordinates(int x, int y);
+
+		static Orientation sens;
+
 		QGraphicsScene *scene;
 };
 

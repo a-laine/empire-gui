@@ -3,9 +3,20 @@
 #include <QBrush>
 
 
-Unit::Unit(QGraphicsItem *parent) : QGraphicsRectItem(parent)
+Unit::Unit(QPointF pos, QGraphicsItem *parent) :
+	item(new QGraphicsRectItem(parent))
 {
-	setRect(-25,-25,50,50);
-	setBrush(QBrush(Qt::red));
-	setFlag(QGraphicsItem::ItemIsSelectable);
+	item->setPos(pos);
+	item->setRect(-25,-25,50,50);
+	item->setFlag(QGraphicsItem::ItemIsSelectable);
+}
+
+void Unit::setColor(QColor color)
+{
+	item->setBrush(QBrush(color));
+}
+
+QGraphicsItem* Unit::getGraphicsItem()
+{
+	return item;
 }

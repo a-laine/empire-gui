@@ -3,8 +3,7 @@
 
 #include <QMainWindow>
 #include "graphics/scene.hpp"
-#include "network/networkcontroller.hpp"
-#include "controller/maincontroller.hpp"
+
 
 
 namespace Ui {
@@ -19,11 +18,12 @@ class MainWindow : public QMainWindow
 		explicit MainWindow(QWidget *parent = 0);
 		~MainWindow();
 
+		void initialize(QString address, int port);
+		void initialize(QString address, int port, int sport);
+
 	private:
 		Ui::MainWindow *ui;
 		Scene *scene;
-		NetworkController *netCtrlr;
-		MainController *mainCtrlr;
 };
 
 #endif // MAINWINDOW_HPP
