@@ -5,7 +5,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
 	scene(new Scene),
-	netCtrlr(new NetworkController)
+	netCtrlr(new NetworkController),
+	mainCtrlr(new MainController)
 {
 	ui->setupUi(this);
 
@@ -15,4 +16,5 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
 	delete ui;
+	delete mainCtrlr;
 }

@@ -1,8 +1,8 @@
 #include "scene.hpp"
 #include <QBrush>
 
-#include "graphics/hexagon.hpp"
-#include "graphics/unit.hpp"
+#include "hexagon.hpp"
+#include "unit.hpp"
 
 Scene::Scene(QObject *parent) : QGraphicsScene(parent)
 {

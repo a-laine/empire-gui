@@ -2,8 +2,9 @@
 #define MAINWINDOW_HPP
 
 #include <QMainWindow>
-#include "scene.hpp"
+#include "graphics/scene.hpp"
 #include "network/networkcontroller.hpp"
+#include "controller/maincontroller.hpp"
 
 
 namespace Ui {
@@ -22,6 +23,7 @@ class MainWindow : public QMainWindow
 		Ui::MainWindow *ui;
 		Scene *scene;
 		NetworkController *netCtrlr;
+		MainController *mainCtrlr;
 };
 
 #endif // MAINWINDOW_HPP

@@ -17,12 +17,16 @@ SOURCES += main.cpp\
 	network/networkcontroller.cpp \
 	graphics/scene.cpp \
     graphics/hexagon.cpp \
-    graphics/unit.cpp
+    graphics/unit.cpp \
+    controller/maincontroller.cpp \
+    graphics/viewinterface.cpp
 
 HEADERS  += mainwindow.hpp \
 	network/networkcontroller.hpp \
 	graphics/scene.hpp \
     graphics/hexagon.hpp \
-    graphics/unit.hpp
+    graphics/unit.hpp \
+    controller/maincontroller.hpp \
+    graphics/viewinterface.hpp
 
 FORMS    += mainwindow.ui

@@ -9,6 +9,9 @@ class Hexagon : public QGraphicsPolygonItem
 {
 	public:
 		Hexagon(QGraphicsItem *parent = 0);
+
+		void setHorizontal();
+		void setVertical();
 };
 
 #endif // HEXAGON_HPP
