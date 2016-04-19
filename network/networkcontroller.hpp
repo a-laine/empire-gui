@@ -13,13 +13,27 @@ class NetworkController : public QObject
 {
 		Q_OBJECT
 	public:
-		NetworkController(QString address, int port, int sport, QObject *parent);
-		NetworkController(QString address, int port, QObject *parent);
+		NetworkController(QString address, int port, int sport = 0, QObject *parent = 0);
+
+		connectServer();
+		connectServer(QString address, int port);
+		void waitClientConnection();
+		void waitClientConnection(int port);
 
 	signals:
+		void serverMessage(QString message);
+		void clientMessage(QString message);
 
 	public slots:
 
+	private:
+		QTcpSocket *serverSocket;
+		QTcpSocket *clientSocket;
+		QTcpServer *clientServer;
+
+		QString serverAddress;
+		int serverPort;
+		int clientPort;
 };
 
 #endif // NETWORKCONTROLLER_HPP

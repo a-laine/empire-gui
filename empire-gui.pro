@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     graphics/hexagon.cpp \
     graphics/unit.cpp \
     controller/maincontroller.cpp \
-    graphics/viewinterface.cpp
+    graphics/viewinterface.cpp \
+    graphics/graphicsview.cpp
 
 HEADERS  += mainwindow.hpp \
 	network/networkcontroller.hpp \
@@ -27,6 +28,7 @@ HEADERS  += mainwindow.hpp \
     graphics/hexagon.hpp \
     graphics/unit.hpp \
     controller/maincontroller.hpp \
-    graphics/viewinterface.hpp
+    graphics/viewinterface.hpp \
+    graphics/graphicsview.hpp
 
 FORMS    += mainwindow.ui

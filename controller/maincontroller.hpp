@@ -12,6 +12,9 @@ class MainController : public QObject
 	public:
 		explicit MainController(ViewInterface *view, NetworkController *net, QObject *parent = 0);
 
+		void setObserverMode(bool enabled);
+		bool getObserverMode();
+
 	signals:
 
 	public slots:
@@ -19,6 +22,8 @@ class MainController : public QObject
 	private:
 		ViewInterface *viewInterface;
 		NetworkController *networkCtrlr;
+
+		bool observerMode;
 };
 
 #endif // MAINCONTROLLER_HPP

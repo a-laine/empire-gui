@@ -1,8 +1,9 @@
 #include "scene.hpp"
 #include <QBrush>
+#include <QGraphicsView>
+#include <QGraphicsSceneWheelEvent>
 
-#include "hexagon.hpp"
-#include "unit.hpp"
+
 
 Scene::Scene(QObject *parent) : QGraphicsScene(parent)
 {

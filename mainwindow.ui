@@ -26,7 +26,7 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QGraphicsView" name="graphicsView"/>
+      <widget class="GraphicsView" name="graphicsView"/>
       <widget class="QGroupBox" name="groupBox">
        <property name="title">
         <string>Actions</string>
@@ -49,6 +49,7 @@
     <property name="title">
      <string>Menu</string>
     </property>
+    <addaction name="actionObserver_Mode"/>
    </widget>
    <widget class="QMenu" name="menuActions">
     <property name="title">
@@ -59,8 +60,29 @@
    <addaction name="menuActions"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionObserver_Mode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Observer Mode</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>GraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>graphics/graphicsview.hpp</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

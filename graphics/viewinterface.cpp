@@ -35,7 +35,14 @@ Hexagon* ViewInterface::createHexagon(int x, int y, Hexagon::Type type)
 {
 	QPointF pos = toGraphicsCoordinates(x, y);
 	Hexagon *hex = new Hexagon(pos);
-	hex->setHorizontal();
+	switch (sens) {
+		case HORIZONTAL:
+			hex->setHorizontal();
+			break;
+		case VERTICAL:
+			hex->setVertical();
+			break;
+	}
 	hex->setType(type);
 	scene->addItem(hex->getGraphicsItem());
 

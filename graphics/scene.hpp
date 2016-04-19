@@ -13,6 +13,7 @@ class Scene : public QGraphicsScene
 	signals:
 
 	public slots:
+
 };
 
 #endif // SCENE_HPP
