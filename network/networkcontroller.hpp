@@ -15,16 +15,27 @@ class NetworkController : public QObject
 	public:
 		NetworkController(QString address, int port, int sport = 0, QObject *parent = 0);
 
-		connectServer();
-		connectServer(QString address, int port);
+		void connectServer();
+		void connectServer(QString address, int port);
 		void waitClientConnection();
 		void waitClientConnection(int port);
 
 	signals:
 		void serverMessage(QString message);
 		void clientMessage(QString message);
+		void disconnected();
 
 	public slots:
+		void sendMessageToServer(QString message);
+		void sendMessageToClient(QString message);
+
+	private slots:
+		void messageFromServer();
+		void messageFromClient();
+		void socketError(QAbstractSocket::SocketError socketError);
+		void clientConnexion();
+		void disconnectedFromClient();
+		void disconnectedFromServer();
 
 	private:
 		QTcpSocket *serverSocket;
@@ -34,6 +45,9 @@ class NetworkController : public QObject
 		QString serverAddress;
 		int serverPort;
 		int clientPort;
+
+		QString serverMsg;
+		QString clientMsg;
 };
 
 #endif // NETWORKCONTROLLER_HPP

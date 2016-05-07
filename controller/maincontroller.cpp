@@ -4,7 +4,7 @@ MainController::MainController(ViewInterface *view, NetworkController *net, QObj
 	QObject(parent),
 	viewInterface(view),
 	networkCtrlr(net),
-	observerMode(ture)
+	observerMode(true)
 {
 	viewInterface->createHexagon(0,0,Hexagon::GROUND);
 	viewInterface->createUnit(0,0,QColor(Qt::red));

@@ -32,7 +32,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::initialize(QString address, int port)
 {
-	NetworkController *netCtrlr = new NetworkController(address, port, this);
+	NetworkController *netCtrlr = new NetworkController(address, port, 0, this);
 	ViewInterface *viewInt = new ViewInterface(scene);
 	mainCtrlr = new MainController(viewInt, netCtrlr, this);
 	ui->actionObserver_Mode->setChecked(true);
