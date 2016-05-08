@@ -1,7 +1,7 @@
 #include "networkcontroller.hpp"
 
 #include <QMessageBox>
-#include <QDataStream>
+#include <QTextStream>
 
 
 NetworkController::NetworkController(QString address, int port, int sport, QObject* parent) :
@@ -60,12 +60,18 @@ void NetworkController::waitClientConnection(int port)
 
 void NetworkController::sendMessageToServer(QString message)
 {
-
+	QByteArray block;
+	QTextStream out(&block, QIODevice::WriteOnly);
+	out << message;
+	serverSocket->write(block);
 }
 
 void NetworkController::sendMessageToClient(QString message)
 {
-
+	QByteArray block;
+	QTextStream out(&block, QIODevice::WriteOnly);
+	out << message;
+	clientSocket->write(block);
 }
 
 void NetworkController::messageFromServer()
@@ -83,7 +89,7 @@ void NetworkController::messageFromServer()
 		QString msg = list.at(i);
 		if(i == 0)
 			msg.append(serverMsg);
-		emit serverMessage(msg);
+		emit serverMessage(msg + '\n');
 	}
 	if(!last.isEmpty())
 		serverMsg = last;
@@ -106,7 +112,7 @@ void NetworkController::messageFromClient()
 		QString msg = list.at(i);
 		if(i == 0)
 			msg.append(clientMsg);
-		emit clientMessage(msg);
+		emit clientMessage(msg + '\n');
 	}
 	if(!last.isEmpty())
 		clientMsg = last;
@@ -146,6 +152,8 @@ void NetworkController::clientConnexion()
 	connect(clientSocket, SIGNAL(disconnected()), this, SLOT(disconnectedFromClient()));
 	connect(clientSocket, SIGNAL(error(QAbstractSocket::SocketError)),
 			this, SLOT(socketError(QAbstractSocket::SocketError)));
+	connect(this, SIGNAL(clientMessage(QString)), this, SLOT(sendMessageToServer(QString)));
+	connect(this, SIGNAL(serverMessage(QString)), this, SLOT(sendMessageToClient(QString)));
 }
 
 void NetworkController::disconnectedFromClient()

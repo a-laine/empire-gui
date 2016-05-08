@@ -6,8 +6,6 @@
 #include <QTcpServer>
 
 
-// http://doc.qt.io/qt-5/qtnetwork-fortuneclient-example.html
-// http://doc.qt.io/qt-5/qtnetwork-fortuneserver-example.html
 
 class NetworkController : public QObject
 {
