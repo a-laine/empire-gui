@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 	QCoreApplication::setApplicationName("empire-gui");
 
+	// Configure parser for command line arguments
 	QCommandLineParser parser;
 	parser.setSingleDashWordOptionMode(QCommandLineParser::ParseAsLongOptions);
 	parser.addHelpOption();
@@ -17,9 +18,12 @@ int main(int argc, char *argv[])
 	QCommandLineOption portOption(QStringList() << "sport", "Source port for client connection.", "sport");
 	parser.addOption(portOption);
 
+	// Get arguments values
 	parser.process(a);
 
 	MainWindow w;
+
+	// Process arguments
 	QStringList args = parser.positionalArguments();
 	if(args.size() != 2)
 	{
