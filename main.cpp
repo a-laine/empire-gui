@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <iostream>
 
 
 int main(int argc, char *argv[])
@@ -13,9 +14,11 @@ int main(int argc, char *argv[])
 	QCommandLineParser parser;
 	parser.setSingleDashWordOptionMode(QCommandLineParser::ParseAsLongOptions);
 	parser.addHelpOption();
-	parser.addPositionalArgument("address", "Server address.");
-	parser.addPositionalArgument("port", "Server port.");
-	QCommandLineOption portOption(QStringList() << "sport", "Source port for client connection.", "sport");
+	QCommandLineOption modeOption("-obs", "Start the client as observer.");
+	parser.addOption(modeOption);
+	QCommandLineOption addressOption("saddr", "Server address.", "port", "localhost");
+	parser.addOption(addressOption);
+	QCommandLineOption portOption("sport", "Server port.", "port", "0");
 	parser.addOption(portOption);
 
 	// Get arguments values
@@ -25,29 +28,9 @@ int main(int argc, char *argv[])
 
 	// Process arguments
 	QStringList args = parser.positionalArguments();
-	if(args.size() != 2)
-	{
-		parser.showHelp(1); // exit error
-	}
-	QString address = args.at(0);
-	int port = args.at(1).toInt();
-	if(address.isEmpty() || port<1024 || port>65535)
-	{
-		parser.showHelp(1); // exit error
-	}
-	if(parser.isSet(portOption) && !parser.value(portOption).isEmpty())
-	{
-		int sport = parser.value(portOption).toInt();
-		if(sport<1024 || sport>65535)
-		{
-			parser.showHelp(1); // exit error
-		}
-		w.initialize(address, port, sport);
-	}
-	else
-	{
-		w.initialize(address, port);
-	}
+	QString address = parser.value("saddr");
+	int port = parser.value("sport");
+	w.initialize(address, port, parser.isSet(modeOption));
 	w.show();
 
 	return a.exec();

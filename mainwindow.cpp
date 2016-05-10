@@ -30,29 +30,26 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
-void MainWindow::initialize(QString address, int port)
+void MainWindow::initialize(QString address, int port, bool observer)
 {
-	NetworkController *netCtrlr = new NetworkController(address, port, 0, this);
+	NetworkController *netCtrlr = new NetworkController(address, port, this);
 	ViewInterface *viewInt = new ViewInterface(scene);
 	mainCtrlr = new MainController(viewInt, netCtrlr, this);
 
-	ui->actionObserver_Mode->setChecked(true);
-	observerMode(true);
+	ui->actionObserver_Mode->setChecked(observer);
+	observerMode(observer);
 
 	netCtrlr->connectServer();
 }
 
-void MainWindow::initialize(QString address, int port, int sport)
+void MainWindow::initialize(bool observer)
 {
-	NetworkController *netCtrlr = new NetworkController(address, port, sport, this);
+	NetworkController *netCtrlr = new NetworkController(this);
 	ViewInterface *viewInt = new ViewInterface(scene);
 	mainCtrlr = new MainController(viewInt, netCtrlr, this);
 
-	ui->actionObserver_Mode->setChecked(false);
-	observerMode(false);
-
-	netCtrlr->connectServer();
-	netCtrlr->waitClientConnection();
+	ui->actionObserver_Mode->setChecked(observer);
+	observerMode(observer);
 }
 
 void MainWindow::observerMode(bool enabled)

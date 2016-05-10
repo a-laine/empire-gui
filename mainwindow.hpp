@@ -21,21 +21,22 @@ class MainWindow : public QMainWindow
 		~MainWindow();
 
 		/*!
-		 * \brief Initialize network related components.
+		 * \brief Initialize all non GUI components.
 		 * Initialize main controller and network controller
-		 * considering the given server address and port.
-		 * The application is launched in interactive mode.
+		 * considering the given server port.
+		 * The application is launched in observer mode if
+		 * observer is set to true and in interactive mode if not.
 		 */
-		void initialize(QString address, int port);
+		void initialize(QString address, int port, bool observer);
 
 		/*!
-		 * \brief Initialize network related components.
+		 * \brief Initialize all non GUI components.
 		 * Initialize main controller and network controller
-		 * considering the given server address and port
-		 * and the given client port.
-		 * The application is launched in observer mode.
+		 * but don't connect to server.
+		 * The application is launched in observer mode if
+		 * observer is set to true and in interactive mode if not.
 		 */
-		void initialize(QString address, int port, int sport);
+		void initialize(bool observer);
 
 	public slots:
 		/*!
