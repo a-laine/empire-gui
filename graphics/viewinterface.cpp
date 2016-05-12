@@ -1,7 +1,6 @@
 #include "viewinterface.hpp"
 
 
-ViewInterface::Orientation ViewInterface::sens = ViewInterface::HORIZONTAL;
 
 
 
@@ -10,39 +9,20 @@ ViewInterface::ViewInterface(QGraphicsScene* parent) : QObject(parent)
 	scene = parent;
 }
 
-void ViewInterface::setMapSize(int x, int y, Orientation orientation)
+void ViewInterface::setMapSize(int x, int y)
 {
-	QPointF sizeMap;
-	QPointF sizeH;
-	sens = orientation;
-	switch (sens) {
-		case HORIZONTAL:
-			sizeMap = toGraphicsCoordinates(x, y);
-			sizeH = Hexagon::getHorizontalSize();
-			scene->setSceneRect(-sizeH.x()/2, -sizeH.y()/2,
-								sizeMap.y()+sizeH.y()/2, sizeMap.x()+sizeH.x()/2);
-			break;
-		case VERTICAL:
-			sizeMap = toGraphicsCoordinates(x, y);
-			sizeH = Hexagon::getVerticalSize();
-			scene->setSceneRect(-sizeH.x()/2, -sizeH.y()/2,
-								sizeMap.y()+sizeH.y()/2, sizeMap.x()+sizeH.x()/2);
-			break;
-	}
+	QPointF sizeMap = toGraphicsCoordinates(x, y);
+	QPointF sizeH = Hexagon::getHorizontalSize();
+	qreal hHex = sizeH.x();
+	qreal wHex = sizeH.y();
+	scene->setSceneRect(-hHex/2, -wHew/2, sizeMap.y()+wHex/2, sizeMap.x()+hHex/2);
 }
 
 Hexagon* ViewInterface::createHexagon(int x, int y, Hexagon::Type type)
 {
 	QPointF pos = toGraphicsCoordinates(x, y);
 	Hexagon *hex = new Hexagon(pos);
-	switch (sens) {
-		case HORIZONTAL:
-			hex->setHorizontal();
-			break;
-		case VERTICAL:
-			hex->setVertical();
-			break;
-	}
+	hex->setHorizontal();
 	hex->setType(type);
 	scene->addItem(hex->getGraphicsItem());
 
@@ -83,17 +63,9 @@ void ViewInterface::remove(Hexagon* hexagon)
 
 QPointF ViewInterface::toGraphicsCoordinates(int x, int y)
 {
-	QPointF size;
-	switch (sens) {
-		case HORIZONTAL:
-			size = Hexagon::getHorizontalSize();
-			return QPointF(size.x()*x + size.x()/2,
-						   size.y()*y + size.y()/2);
-		case VERTICAL:
-			size = Hexagon::getVerticalSize();
-			return QPointF(size.x()*x + size.x()/2,
-						   size.y()*y + size.y()/2);
-	}
-	Q_UNREACHABLE();
+	QPointF size = Hexagon::getHorizontalSize();
+	qreal hHex;
+	qreal wHex;
+	return QPointF(y*wHex, x*0.5*hHex);
 }
 

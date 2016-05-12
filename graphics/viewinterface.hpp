@@ -13,11 +13,6 @@ class ViewInterface : public QObject
 {
 		Q_OBJECT
 	public:
-		enum Orientation {
-			HORIZONTAL,
-			VERTICAL
-		};
-
 
 		explicit ViewInterface(QGraphicsScene *parent = 0);
 
@@ -27,7 +22,7 @@ class ViewInterface : public QObject
 		 * Setting the size of the map improve rendering efficiency
 		 * and initial camera position.
 		 */
-		void setMapSize(int x, int y, Orientation orientation);
+		void setMapSize(int x, int y);
 
 		/*!
 		 * \brief Create an hexagon on the view.
@@ -73,8 +68,6 @@ class ViewInterface : public QObject
 		 * the hexagon size and game coordinates system.
 		 */
 		static QPointF toGraphicsCoordinates(int x, int y);
-
-		static Orientation sens; //!< Hexagon orientation
 
 		QGraphicsScene *scene;
 };
