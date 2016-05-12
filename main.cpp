@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	QCommandLineParser parser;
 	parser.setSingleDashWordOptionMode(QCommandLineParser::ParseAsLongOptions);
 	parser.addHelpOption();
-	QCommandLineOption modeOption("-obs", "Start the client as observer.");
+	QCommandLineOption modeOption("obs", "Start the client as observer.");
 	parser.addOption(modeOption);
 	QCommandLineOption addressOption("saddr", "Server address.", "port", "localhost");
 	parser.addOption(addressOption);
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	// Process arguments
 	QStringList args = parser.positionalArguments();
 	QString address = parser.value("saddr");
-	int port = parser.value("sport");
+	int port = parser.value("sport").toInt();
 	w.initialize(address, port, parser.isSet(modeOption));
 	w.show();
 
