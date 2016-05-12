@@ -16,8 +16,12 @@ class MainController : public QObject
 		bool getObserverMode();
 
 	signals:
+		void sendMessage(QString message);
+		void gameError(QString error);
 
 	public slots:
+		void processMessage(QString message);
+		void disconnected();
 
 	private:
 		ViewInterface *viewInterface;
