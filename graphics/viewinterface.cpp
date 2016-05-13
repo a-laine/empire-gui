@@ -78,7 +78,7 @@ QPointF ViewInterface::toGraphicsCoordinates(int x, int y)
 {
 	QPointF size = Hexagon::getHorizontalSize();
 	qreal hHex = size.x();
-	qreal wHex = size.y();
-	return QPointF(y*wHex, x*0.5*hHex);
+	qreal wHex = size.y()*0.75;
+	return QPointF(x*hHex+y*0.5*hHex, y*wHex);
 }
 

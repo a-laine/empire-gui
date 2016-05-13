@@ -6,12 +6,12 @@
 
 QPointF Hexagon::getHorizontalSize()
 {
-	return QPointF(25*0.866, 25);
+	return QPointF(25*0.866*4.0, 25*4.0);
 }
 
 QPointF Hexagon::getVerticalSize()
 {
-	return QPointF(25, 25*0.866);
+	return QPointF(25*4.0, 25*0.866*4.0);
 }
 
 
@@ -33,8 +33,8 @@ void Hexagon::setHorizontal()
 {
 	QPolygonF polygon;
 
-	const qreal h = getHorizontalSize().x();
-	const qreal w = getHorizontalSize().y();
+	const qreal h = getHorizontalSize().x() / 4.0;
+	const qreal w = getHorizontalSize().y() / 4.0;
 	polygon << QPointF( 0*h,-2*w)
 			<< QPointF(-2*h,-1*w)
 			<< QPointF(-2*h, 1*w)
@@ -49,8 +49,8 @@ void Hexagon::setVertical()
 {
 	QPolygonF polygon;
 
-	const qreal h = getVerticalSize().x();
-	const qreal w = getVerticalSize().y();
+	const qreal h = getVerticalSize().x() / 4.0;
+	const qreal w = getVerticalSize().y() / 4.0;
 	polygon << QPointF(-2*h, 0*w)
 			<< QPointF(-1*h, 2*w)
 			<< QPointF( 1*h, 2*w)
