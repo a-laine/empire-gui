@@ -20,7 +20,10 @@ SOURCES += main.cpp\
     graphics/unit.cpp \
     controller/maincontroller.cpp \
     graphics/viewinterface.cpp \
-    graphics/graphicsview.cpp
+    graphics/graphicsview.cpp \
+    model/gamemodel.cpp \
+    model/tile.cpp \
+    model/piece.cpp
 
 HEADERS  += mainwindow.hpp \
 	network/networkcontroller.hpp \
@@ -29,6 +32,9 @@ HEADERS  += mainwindow.hpp \
     graphics/unit.hpp \
     controller/maincontroller.hpp \
     graphics/viewinterface.hpp \
-    graphics/graphicsview.hpp
+    graphics/graphicsview.hpp \
+    model/gamemodel.hpp \
+    model/tile.hpp \
+    model/piece.hpp
 
 FORMS    += mainwindow.ui
