@@ -24,6 +24,11 @@ Hexagon::Hexagon(QPointF pos, QGraphicsItem* parent) :
 	item->setPos(pos);
 }
 
+Hexagon::~Hexagon()
+{
+	delete item;
+}
+
 void Hexagon::setHorizontal()
 {
 	QPolygonF polygon;

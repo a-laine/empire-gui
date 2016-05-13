@@ -11,6 +11,11 @@ Unit::Unit(QPointF pos, QGraphicsItem *parent) :
 	item->setFlag(QGraphicsItem::ItemIsSelectable);
 }
 
+Unit::~Unit()
+{
+	delete item;
+}
+
 void Unit::setColor(QColor color)
 {
 	item->setBrush(QBrush(color));

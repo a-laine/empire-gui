@@ -15,7 +15,7 @@ void ViewInterface::setMapSize(int x, int y)
 	QPointF sizeH = Hexagon::getHorizontalSize();
 	qreal hHex = sizeH.x();
 	qreal wHex = sizeH.y();
-	scene->setSceneRect(-hHex/2, -wHew/2, sizeMap.y()+wHex/2, sizeMap.x()+hHex/2);
+	scene->setSceneRect(-hHex/2, -wHex/2, sizeMap.y()+wHex/2, sizeMap.x()+hHex/2);
 }
 
 Hexagon* ViewInterface::createHexagon(int x, int y, Hexagon::Type type)
@@ -25,6 +25,7 @@ Hexagon* ViewInterface::createHexagon(int x, int y, Hexagon::Type type)
 	hex->setHorizontal();
 	hex->setType(type);
 	scene->addItem(hex->getGraphicsItem());
+	objectList.insert(hex);
 
 	return hex;
 }
@@ -35,6 +36,7 @@ Unit* ViewInterface::createUnit(int x, int y, QColor color)
 	Unit *unit = new Unit(pos);
 	unit->setColor(color);
 	scene->addItem(unit->getGraphicsItem());
+	objectList.insert(unit);
 
 	return unit;
 }
@@ -48,15 +50,26 @@ void ViewInterface::move(Unit* unit, int x, int y)
 void ViewInterface::remove(Unit* unit)
 {
 	scene->removeItem(unit->getGraphicsItem());
-	delete unit->getGraphicsItem();
 	delete unit;
+	objectList.remove(unit);
 }
 
 void ViewInterface::remove(Hexagon* hexagon)
 {
 	scene->removeItem(hexagon->getGraphicsItem());
-	delete hexagon->getGraphicsItem();
 	delete hexagon;
+	objectList.remove(hexagon);
+}
+
+void ViewInterface::clearView()
+{
+	for(QSet<GraphicsObject*>::iterator it = objectList.begin();
+		it != objectList.end(); it++)
+	{
+		scene->removeItem((*it)->getGraphicsItem());
+		delete (*it);
+	}
+	objectList.clear();
 }
 
 
@@ -64,8 +77,8 @@ void ViewInterface::remove(Hexagon* hexagon)
 QPointF ViewInterface::toGraphicsCoordinates(int x, int y)
 {
 	QPointF size = Hexagon::getHorizontalSize();
-	qreal hHex;
-	qreal wHex;
+	qreal hHex = size.x();
+	qreal wHex = size.y();
 	return QPointF(y*wHex, x*0.5*hHex);
 }
 

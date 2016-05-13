@@ -1,14 +1,17 @@
 #ifndef UNIT_HPP
 #define UNIT_HPP
 
+#include "graphicsobject.hpp"
+
 #include <QGraphicsRectItem>
 #include <QColor>
 
 
-class Unit : public QGraphicsRectItem
+class Unit : public GraphicsObject
 {
 	public:
 		Unit(QPointF pos, QGraphicsItem *parent = 0);
+		~Unit();
 
 		void setColor(QColor color);
 		QGraphicsItem* getGraphicsItem();

@@ -5,6 +5,7 @@
 #include <QColor>
 #include <QGraphicsScene>
 #include <QPointF>
+#include <QSet>
 #include "hexagon.hpp"
 #include "unit.hpp"
 
@@ -57,6 +58,11 @@ class ViewInterface : public QObject
 		 */
 		void remove(Hexagon* hexagon);
 
+		/*!
+		 * \brief Remove and delete all componants in the scene.
+		 */
+		void clearView();
+
 	signals:
 
 	public slots:
@@ -70,6 +76,7 @@ class ViewInterface : public QObject
 		static QPointF toGraphicsCoordinates(int x, int y);
 
 		QGraphicsScene *scene;
+		QSet<GraphicsObject*> objectList;
 };
 
 #endif // VIEWINTERFACE_HPP

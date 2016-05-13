@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     graphics/graphicsview.cpp \
     model/gamemodel.cpp \
     model/tile.cpp \
-    model/piece.cpp
+    model/piece.cpp \
+    graphics/graphicsobject.cpp
 
 HEADERS  += mainwindow.hpp \
 	network/networkcontroller.hpp \
@@ -35,6 +36,7 @@ HEADERS  += mainwindow.hpp \
     graphics/graphicsview.hpp \
     model/gamemodel.hpp \
     model/tile.hpp \
-    model/piece.hpp
+    model/piece.hpp \
+    graphics/graphicsobject.hpp
 
 FORMS    += mainwindow.ui

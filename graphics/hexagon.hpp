@@ -1,11 +1,13 @@
 #ifndef HEXAGON_HPP
 #define HEXAGON_HPP
 
+#include "graphicsobject.hpp"
+
 #include <QGraphicsPolygonItem>
 
 
 
-class Hexagon
+class Hexagon : public GraphicsObject
 {
 	public:
 		enum Type {
@@ -28,6 +30,7 @@ class Hexagon
 		 * \brief Create an hexagon at the given position.
 		 */
 		Hexagon(QPointF pos, QGraphicsItem *parent = 0);
+		~Hexagon();
 
 
 		/*!
