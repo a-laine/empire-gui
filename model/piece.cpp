@@ -1,10 +1,11 @@
 #include "piece.hpp"
 
 
-Piece::Piece(int id, Piece::Type type, Piece::Team owner) :
+Piece::Piece(int id, int type, int ownerId) :
 	m_id(id),
 	m_type(type),
-	m_team(owner)
+	m_team(ownerId),
+	m_graphics(0)
 {
 }
 
@@ -13,14 +14,24 @@ int Piece::getId()
 	return m_id;
 }
 
-Piece::Type Piece::getType()
+int Piece::getType()
 {
 	return m_type;
 }
 
-Piece::Team Piece::getOwner()
+int Piece::getOwner()
 {
 	return m_team;
+}
+
+void Piece::setGraphicsObject(void* object)
+{
+	m_graphics = object;
+}
+
+void* Piece::getGraphicsObject()
+{
+	return m_graphics;
 }
 
 void Piece::addTransported(Piece* transported)

@@ -8,25 +8,22 @@ class Piece
 {
 	public:
 		enum Type {
-			CITY,
-			FIGHT,
-			ARMY,
-			TRANSPORT,
-			PATROL,
-			BATTLESHIP
-		};
-		enum Team {
-			PLAYER1,
-			PLAYER2,
-			NEUTRAL
+			FIGHT = 0,
+			ARMY = 1,
+			TRANSPORT = 2,
+			PATROL = 3,
+			BATTLESHIP = 4,
+			CITY
 		};
 
 
-		Piece(int id, Type type, Team owner);
+		Piece(int id, int type, int ownerId);
 
 		int getId();
-		Type getType();
-		Team getOwner();
+		int getType();
+		int getOwner();
+		void setGraphicsObject(void* object);
+		void* getGraphicsObject();
 		void addTransported(Piece* transported);
 		void removeTransported(Piece* transported);
 		QSet<Piece*> getTransported();
@@ -34,8 +31,9 @@ class Piece
 
 	private:
 		int m_id;
-		Type m_type;
-		Team m_team;
+		int m_type;
+		int m_team;
+		void* m_graphics;
 		QSet<Piece*> m_transported;
 };
 

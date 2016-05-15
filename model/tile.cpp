@@ -4,7 +4,8 @@
 Tile::Tile(Tile::Type type) :
 	m_type(type),
 	m_piece(0),
-	m_visible(true)
+	m_visible(true),
+	m_graphics(0)
 {
 }
 
@@ -31,4 +32,14 @@ void Tile::putPiece(Piece* piece)
 Piece*Tile::getPiece()
 {
 	return m_piece;
+}
+
+void Tile::setGraphicsObject(void* object)
+{
+	m_graphics = object;
+}
+
+void*Tile::getGraphicsObject()
+{
+	return m_graphics;
 }

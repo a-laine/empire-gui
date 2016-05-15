@@ -15,6 +15,12 @@ class GameModel
 
 		void clear();
 
+		void setMapWidth(int width);
+		void setMapHeight(int height);
+		int getMapWidth();
+		int getMapHeight();
+		void setPlayerId(int id);
+		int getPlayerId();
 		void setTile(QPoint position, Tile* tile);
 		void addPiece(int id, Piece* piece);
 		Tile* getTile(QPoint position);
@@ -24,7 +30,7 @@ class GameModel
 
 	private:
 		QPoint mapSize;
-		qint32 playerId;
+		int playerId;
 
 		QHash<QPair<int,int>,Tile*> tiles;
 		QHash<int,Piece*> units;

@@ -53,6 +53,11 @@ class Hexagon : public GraphicsObject
 		 */
 		void setType(Type type);
 
+		/*!
+		 * \brief Change the aspect depending on if the hexagon is seen by units or not.
+		 */
+		void setVisible(bool visible);
+
 		QGraphicsItem* getGraphicsItem();
 
 	private:

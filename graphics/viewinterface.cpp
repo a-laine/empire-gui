@@ -2,8 +2,6 @@
 
 
 
-
-
 ViewInterface::ViewInterface(QGraphicsScene* parent) : QObject(parent)
 {
 	scene = parent;

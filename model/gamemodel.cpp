@@ -1,6 +1,8 @@
 #include "gamemodel.hpp"
 
-GameModel::GameModel()
+GameModel::GameModel() :
+	mapSize(-1,-1),
+	playerId(-1)
 {
 }
 
@@ -19,6 +21,36 @@ void GameModel::clear()
 		delete *it;
 	}
 	units.clear();
+}
+
+void GameModel::setMapWidth(int width)
+{
+	mapSize.setY(width);
+}
+
+void GameModel::setMapHeight(int height)
+{
+	mapSize.setX(height);
+}
+
+int GameModel::getMapWidth()
+{
+	return mapSize.y();
+}
+
+int GameModel::getMapHeight()
+{
+	return mapSize.x();
+}
+
+void GameModel::setPlayerId(int id)
+{
+	playerId = id;
+}
+
+int GameModel::getPlayerId()
+{
+	return playerId;
 }
 
 void GameModel::setTile(QPoint position, Tile* tile)

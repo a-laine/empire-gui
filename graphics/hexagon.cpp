@@ -75,6 +75,14 @@ void Hexagon::setType(Hexagon::Type type)
 	}
 }
 
+void Hexagon::setVisible(bool visible)
+{
+	if(visible)
+		item->setOpacity(1);
+	else
+		item->setOpacity(0.25);
+}
+
 QGraphicsItem* Hexagon::getGraphicsItem()
 {
 	return item;

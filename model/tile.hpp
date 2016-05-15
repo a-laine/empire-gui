@@ -19,12 +19,15 @@ class Tile
 		bool isVisible();
 		void putPiece(Piece* piece);
 		Piece* getPiece();
+		void setGraphicsObject(void* object);
+		void* getGraphicsObject();
 
 
 	private:
 		Type m_type;
 		Piece* m_piece;
 		bool m_visible;
+		void* m_graphics;
 };
 
 #endif // TILE_HPP
