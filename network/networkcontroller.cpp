@@ -2,6 +2,7 @@
 
 #include <QMessageBox>
 #include <QTextStream>
+#include <iostream>
 
 
 NetworkController::NetworkController(QString address, int port, QObject* parent) :
@@ -66,12 +67,12 @@ void NetworkController::messageReceived()
 	QString last = list.at(list.size()-1);
 	if(!last.isEmpty())
 		size--;
-	for(int i = 1; i<size; i++)
+	for(int i = 0; i<size; i++)
 	{
 		QString msg = list.at(i);
 		if(i == 0)
 			msg.append(serverMsg);
-		emit serverMessage(msg + '\n');
+		emit serverMessage(msg);
 	}
 	if(!last.isEmpty())
 		serverMsg = last;

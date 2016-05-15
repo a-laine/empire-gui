@@ -1,5 +1,6 @@
 #include "maincontroller.hpp"
 #include <QMessageBox>
+#include <iostream>
 
 
 MainController::MainController(ViewInterface *view, NetworkController *net, QObject *parent) :
@@ -9,7 +10,7 @@ MainController::MainController(ViewInterface *view, NetworkController *net, QObj
 	observerMode(true)
 {
 	viewInterface->createHexagon(0,0,Hexagon::GROUND);
-	viewInterface->createUnit(0,0,QColor(Qt::red));
+	viewInterface->createUnit(0,0,Unit::ARMY,QColor(Qt::red));
 
 	connect(networkCtrlr, SIGNAL(serverMessage(QString)), this, SLOT(processMessage(QString)));
 	connect(networkCtrlr, SIGNAL(disconnected()), this, SLOT(disconnected()));
@@ -28,8 +29,10 @@ bool MainController::getObserverMode()
 
 void MainController::processMessage(QString message)
 {
-	QStringList l = message.split(' ', QString::SkipEmptyParts);
+	QStringList l = message.split(' ');
+
 	QString command = l.at(0);
+	std::cout << "2 ->\n" << message.toStdString() << std::endl;
 
 	// Inital configuration
 	if(command == "width")
