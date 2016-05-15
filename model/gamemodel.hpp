@@ -1,11 +1,13 @@
 #ifndef GAMEMODEL_HPP
 #define GAMEMODEL_HPP
 
-#include "tile.hpp"
-#include "piece.hpp"
 #include <QHash>
 #include <QPair>
 #include <QPoint>
+
+
+class Piece;
+class Tile;
 
 
 class GameModel

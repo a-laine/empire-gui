@@ -1,4 +1,7 @@
 #include "gamemodel.hpp"
+#include "tile.hpp"
+#include "piece.hpp"
+
 
 GameModel::GameModel() :
 	mapSize(-1,-1),

@@ -2,9 +2,11 @@
 #define MAINCONTROLLER_HPP
 
 #include <QObject>
-#include "graphics/viewinterface.hpp"
-#include "network/networkcontroller.hpp"
-#include "model/gamemodel.hpp"
+
+
+class GameModel;
+class ViewInterface;
+class NetworkController;
 
 
 class MainController : public QObject
@@ -15,6 +17,8 @@ class MainController : public QObject
 
 		void setObserverMode(bool enabled);
 		bool getObserverMode();
+		void endTurn();
+		void movePiece();
 
 	signals:
 		void sendMessage(QString message);

@@ -3,7 +3,9 @@
 
 #include "graphicsobject.hpp"
 
+#include <QGraphicsItemGroup>
 #include <QGraphicsRectItem>
+#include <QGraphicsSimpleTextItem>
 #include <QColor>
 
 
@@ -20,7 +22,7 @@ class Unit : public GraphicsObject
 		};
 
 
-		Unit(QPointF pos, QGraphicsItem *parent = 0);
+		Unit(QPointF pos, int id, QGraphicsItem *parent = 0);
 		~Unit();
 
 		void setType(Type type);
@@ -28,7 +30,10 @@ class Unit : public GraphicsObject
 		QGraphicsItem* getGraphicsItem();
 
 	private:
-		QGraphicsRectItem *item;
+		QGraphicsItemGroup *item;
+		QGraphicsRectItem *rect;
+		QGraphicsSimpleTextItem *text;
+		int unitId;
 };
 
 #endif // UNIT_HPP

@@ -1,4 +1,10 @@
 #include "maincontroller.hpp"
+
+#include "graphics/viewinterface.hpp"
+#include "network/networkcontroller.hpp"
+#include "model/gamemodel.hpp"
+#include "model/tile.hpp"
+#include "model/piece.hpp"
 #include <QMessageBox>
 #include <iostream>
 
@@ -23,6 +29,16 @@ void MainController::setObserverMode(bool enabled)
 bool MainController::getObserverMode()
 {
 	return observerMode;
+}
+
+void MainController::endTurn()
+{
+	networkCtrlr->sendMessageToServer("end_turn\n");
+}
+
+void MainController::movePiece()
+{
+
 }
 
 void MainController::processMessage(QString message)
@@ -217,7 +233,7 @@ void MainController::createCity(int x, int y, int id, int owner)
 		default:
 			break;
 	}
-	Unit* u1 = viewInterface->createUnit(x, y, Unit::CITY, color);
+	Unit* u1 = viewInterface->createUnit(x, y, id, Unit::CITY, color);
 	if(model->getPiece(id) == 0)
 	{
 		Piece* p = new Piece(id, Piece::CITY, owner);
@@ -255,7 +271,7 @@ void MainController::createUnit(int x, int y, int id, int owner, int type)
 			tu = Unit::BATTLESHIP;
 			break;
 	}
-	Unit* u1 = viewInterface->createUnit(x, y, tu, c);
+	Unit* u1 = viewInterface->createUnit(x, y, id, tu, c);
 	if(model->getPiece(id) == 0)
 	{
 		Piece* p = new Piece(id, type, owner);

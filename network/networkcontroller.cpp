@@ -2,7 +2,6 @@
 
 #include <QMessageBox>
 #include <QTextStream>
-#include <iostream>
 
 
 NetworkController::NetworkController(QString address, int port, QObject* parent) :

@@ -3,11 +3,15 @@
 
 #include <QObject>
 #include <QColor>
-#include <QGraphicsScene>
 #include <QPointF>
 #include <QSet>
+#include "ui_mainwindow.h"
 #include "hexagon.hpp"
 #include "unit.hpp"
+
+
+class QGraphicsScene;
+class MainController;
 
 
 class ViewInterface : public QObject
@@ -15,8 +19,10 @@ class ViewInterface : public QObject
 		Q_OBJECT
 	public:
 
-		explicit ViewInterface(QGraphicsScene *parent = 0);
+		explicit ViewInterface(QGraphicsScene *scene, Ui::MainWindow* mainWindowUi);
 
+
+		void setController(MainController* ctrlr);
 
 		/*!
 		 * \brief Set the size of the map and the hexagon orientation.
@@ -39,7 +45,7 @@ class ViewInterface : public QObject
 		 * and with the given colour.
 		 * Ownership is kept by this class.
 		 */
-		Unit* createUnit(int x, int y, Unit::Type type, QColor color);
+		Unit* createUnit(int x, int y, int id, Unit::Type type, QColor color);
 
 		/*!
 		 * \brief Move the unit to the given coordinates.
@@ -66,6 +72,17 @@ class ViewInterface : public QObject
 	signals:
 
 	public slots:
+		void actionMoveNE();
+		void actionMoveNW();
+		void actionMoveE();
+		void actionMoveW();
+		void actionMoveSE();
+		void actionMoveSW();
+		void actionEndTurn();
+		void actionNextUnit();
+		void actionPrevUnit();
+		void newTurn();
+		void unitSelected();
 
 	private:
 		/*!
@@ -75,8 +92,14 @@ class ViewInterface : public QObject
 		 */
 		static QPointF toGraphicsCoordinates(int x, int y);
 
+		void showInformations();
+
+
 		QGraphicsScene *scene;
 		QSet<GraphicsObject*> objectList;
+		Ui::MainWindow* ui;
+		MainController* controller;
+		Unit* selected;
 };
 
 #endif // VIEWINTERFACE_HPP
