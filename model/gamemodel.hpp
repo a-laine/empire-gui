@@ -16,18 +16,18 @@ class GameModel
 		void clear();
 
 		void setTile(QPoint position, Tile* tile);
-		void addPiece(qint32 id, Piece* piece);
+		void addPiece(int id, Piece* piece);
 		Tile* getTile(QPoint position);
-		Piece* getPiece(qint32 id);
+		Piece* getPiece(int id);
 		void removeTile(QPoint position);
-		void removePiece(qint32 id);
+		void removePiece(int id);
 
 	private:
 		QPoint mapSize;
 		qint32 playerId;
 
 		QHash<QPair<int,int>,Tile*> tiles;
-		QHash<qint32,Piece*> units;
+		QHash<int,Piece*> units;
 };
 
 #endif // GAMEMODEL_HPP

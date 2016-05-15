@@ -22,15 +22,18 @@ class Piece
 		};
 
 
-		Piece(Type type, Team owner);
+		Piece(int id, Type type, Team owner);
 
+		int getId();
 		Type getType();
 		Team getOwner();
 		void addTransported(Piece* transported);
+		void removeTransported(Piece* transported);
 		QSet<Piece*> getTransported();
 
 
 	private:
+		int m_id;
 		Type m_type;
 		Team m_team;
 		QSet<Piece*> m_transported;

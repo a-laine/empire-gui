@@ -26,7 +26,7 @@ void GameModel::setTile(QPoint position, Tile* tile)
 	tiles.insert(QPair<int,int>(position.x(),position.y()), tile);
 }
 
-void GameModel::addPiece(qint32 id, Piece* piece)
+void GameModel::addPiece(int id, Piece* piece)
 {
 	units.insert(id, piece);
 }
@@ -36,7 +36,7 @@ Tile* GameModel::getTile(QPoint position)
 	return tiles.value(QPair<int,int>(position.x(),position.y()), 0);
 }
 
-Piece* GameModel::getPiece(qint32 id)
+Piece* GameModel::getPiece(int id)
 {
 	return units.value(id, 0);
 }
@@ -46,7 +46,7 @@ void GameModel::removeTile(QPoint position)
 	tiles.remove(QPair<int,int>(position.x(),position.y()));
 }
 
-void GameModel::removePiece(qint32 id)
+void GameModel::removePiece(int id)
 {
 	units.remove(id);
 }

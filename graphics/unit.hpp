@@ -10,9 +10,20 @@
 class Unit : public GraphicsObject
 {
 	public:
+		enum Type {
+			CITY,
+			FIGHT,
+			ARMY,
+			TRANSPORT,
+			PATROL,
+			BATTLESHIP
+		};
+
+
 		Unit(QPointF pos, QGraphicsItem *parent = 0);
 		~Unit();
 
+		void setType(Type type);
 		void setColor(QColor color);
 		QGraphicsItem* getGraphicsItem();
 
