@@ -31,12 +31,11 @@ class NetworkController : public QObject
 		void disconnectedFromServer();
 
 	private:
-		QTcpSocket *serverSocket;
-
-		QString serverAddress;
-		int serverPort;
-
 		QString serverMsg;
+
+		int serverPort;
+		QString serverAddress;
+		QTcpSocket *serverSocket;
 };
 
 #endif // NETWORKCONTROLLER_HPP

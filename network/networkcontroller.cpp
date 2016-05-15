@@ -6,9 +6,11 @@
 
 NetworkController::NetworkController(QString address, int port, QObject* parent) :
 	QObject(parent),
-	serverAddress(address),
 	serverPort(port),
+	serverAddress(address),
 	serverSocket(new QTcpSocket(this))
+
+
 {
 	connect(serverSocket, SIGNAL(readyRead()), this, SLOT(messageReceived()));
 	connect(serverSocket, SIGNAL(disconnected()), this, SLOT(disconnectedFromServer()));
