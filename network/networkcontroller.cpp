@@ -2,6 +2,8 @@
 
 #include <QMessageBox>
 #include <QTextStream>
+#include <QDataStream>
+#include <iostream>
 
 
 NetworkController::NetworkController(QString address, int port, QObject* parent) :
@@ -51,8 +53,9 @@ void NetworkController::connectServer(QString address, int port)
 void NetworkController::sendMessageToServer(QString message)
 {
 	QByteArray block;
-	QTextStream out(&block, QIODevice::WriteOnly);
-	out << message;
+	QDataStream out(&block, QIODevice::WriteOnly);
+	for(int i=0; i<message.size(); i++)
+		out << message[i].cell();
 	serverSocket->write(block);
 }
 

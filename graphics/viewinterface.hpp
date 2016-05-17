@@ -5,6 +5,8 @@
 #include <QColor>
 #include <QPointF>
 #include <QSet>
+#include <QVector>
+#include <QPair>
 #include "ui_mainwindow.h"
 #include "hexagon.hpp"
 #include "unit.hpp"
@@ -83,6 +85,8 @@ class ViewInterface : public QObject
 		void actionPrevUnit();
 		void newTurn();
 		void unitSelected();
+		void selectedInList(QModelIndex index);
+		void productUnit();
 
 	private:
 		/*!
@@ -92,14 +96,16 @@ class ViewInterface : public QObject
 		 */
 		static QPointF toGraphicsCoordinates(int x, int y);
 
-		void showInformations();
+		void showInformations(QString type, QVector<QPair<QString, int> > transported);
 
 
 		QGraphicsScene *scene;
 		QSet<GraphicsObject*> objectList;
 		Ui::MainWindow* ui;
 		MainController* controller;
-		Unit* selected;
+		int turnNumber;
+		int selected;
+		QVector<int> selectedTransported;
 };
 
 #endif // VIEWINTERFACE_HPP

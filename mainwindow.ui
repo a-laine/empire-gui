@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>961</width>
+    <width>755</width>
     <height>560</height>
    </rect>
   </property>
@@ -34,7 +34,7 @@
         </sizepolicy>
        </property>
        <property name="title">
-        <string/>
+        <string>Tun number : 0</string>
        </property>
        <property name="flat">
         <bool>false</bool>
@@ -103,8 +103,9 @@
            <bool>true</bool>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
+          <widget class="QWidget" name="pageVide"/>
           <widget class="QWidget" name="unit">
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
@@ -115,46 +116,50 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="moveNW">
-              <property name="text">
-               <string>move NW</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="moveNE">
-              <property name="text">
-               <string>move NE</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="moveE">
-              <property name="text">
-               <string>move E</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="moveSE">
-              <property name="text">
-               <string>move SE</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="moveSW">
-              <property name="text">
-               <string>move SW</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="moveW">
-              <property name="text">
-               <string>move W</string>
-              </property>
-             </widget>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="0" column="1">
+               <widget class="QPushButton" name="moveNE">
+                <property name="text">
+                 <string>move NE</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="moveW">
+                <property name="text">
+                 <string>move W</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPushButton" name="moveE">
+                <property name="text">
+                 <string>move E</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QPushButton" name="moveNW">
+                <property name="text">
+                 <string>move NW</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QPushButton" name="moveSW">
+                <property name="text">
+                 <string>move SW</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QPushButton" name="moveSE">
+                <property name="text">
+                 <string>move SE</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
             <item>
              <widget class="QListWidget" name="listTransported">
@@ -176,6 +181,46 @@
                <string>Unit type : CITY</string>
               </property>
              </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <widget class="QComboBox" name="unitTypeCombo">
+                <item>
+                 <property name="text">
+                  <string>FIGHT</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>ARMY</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>TRANSPORT</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>PATROL</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>BATTLESHIP</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="productButton">
+                <property name="text">
+                 <string>Product unit</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
             <item>
              <widget class="QListWidget" name="listInCity">
@@ -202,8 +247,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>961</width>
-     <height>22</height>
+     <width>755</width>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMenu">

@@ -44,7 +44,7 @@ void Piece::removeTransported(Piece* transported)
 	m_transported.remove(transported);
 }
 
-QSet<Piece*> Piece::getTransported()
+QSet<Piece*>& Piece::getTransported()
 {
 	return m_transported;
 }

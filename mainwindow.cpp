@@ -35,6 +35,7 @@ void MainWindow::initialize(QString address, int port, bool observer)
 	NetworkController *netCtrlr = new NetworkController(address, port, this);
 	ViewInterface *viewInt = new ViewInterface(scene, ui);
 	mainCtrlr = new MainController(viewInt, netCtrlr, this);
+	viewInt->setController(mainCtrlr);
 
 	ui->actionObserver_Mode->setChecked(observer);
 	observerMode(observer);
@@ -47,6 +48,7 @@ void MainWindow::initialize(bool observer)
 	NetworkController *netCtrlr = new NetworkController(this);
 	ViewInterface *viewInt = new ViewInterface(scene, ui);
 	mainCtrlr = new MainController(viewInt, netCtrlr, this);
+	viewInt->setController(mainCtrlr);
 
 	ui->actionObserver_Mode->setChecked(observer);
 	observerMode(observer);
@@ -58,6 +60,6 @@ void MainWindow::observerMode(bool enabled)
 		statusMessage->setText("Observer mode");
 	else
 		statusMessage->setText("Player mode");
-	//ui->groupBoxAction->setVisible(!enabled);
+	ui->groupBoxAction->setVisible(!enabled);
 	mainCtrlr->setObserverMode(enabled);
 }

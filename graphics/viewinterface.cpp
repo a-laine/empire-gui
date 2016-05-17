@@ -1,6 +1,6 @@
 #include "viewinterface.hpp"
-#include <QGraphicsScene>
 #include "controller/maincontroller.hpp"
+#include <QGraphicsScene>
 #include <QMessageBox>
 
 
@@ -10,9 +10,11 @@ ViewInterface::ViewInterface(QGraphicsScene* scene, Ui::MainWindow* mainWindowUi
 	scene(scene),
 	ui(mainWindowUi),
 	controller(0),
+	turnNumber(1),
 	selected(0)
 {
 	connect(scene, SIGNAL(selectionChanged()), this, SLOT(unitSelected()));
+	ui->groupBoxView->setTitle(QString("Turn number : %1").arg(turnNumber));
 }
 
 void ViewInterface::setController(MainController* ctrlr)
@@ -28,6 +30,9 @@ void ViewInterface::setController(MainController* ctrlr)
 	connect(ui->endTurnButton, SIGNAL(pressed()), this, SLOT(actionEndTurn()));
 	connect(ui->nextUnitButton, SIGNAL(pressed()), this, SLOT(actionNextUnit()));
 	connect(ui->prevUnitButton, SIGNAL(pressed()), this, SLOT(actionPrevUnit()));
+	connect(ui->listTransported, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectedInList(QModelIndex)));
+	connect(ui->listInCity, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectedInList(QModelIndex)));
+	connect(ui->productButton, SIGNAL(pressed()), this, SLOT(productUnit()));
 }
 
 void ViewInterface::setMapSize(int x, int y)
@@ -96,48 +101,52 @@ void ViewInterface::clearView()
 
 void ViewInterface::actionMoveNE()
 {
-
+	controller->movePiece(selected, "NE");
 }
 
 void ViewInterface::actionMoveNW()
 {
-
+	controller->movePiece(selected, "NW");
 }
 
 void ViewInterface::actionMoveE()
 {
-
+	controller->movePiece(selected, "E");
 }
 
 void ViewInterface::actionMoveW()
 {
-
+	controller->movePiece(selected, "W");
 }
 
 void ViewInterface::actionMoveSE()
 {
-
+	controller->movePiece(selected, "SE");
 }
 
 void ViewInterface::actionMoveSW()
 {
-
+	controller->movePiece(selected, "SW");
 }
 
 void ViewInterface::actionEndTurn()
 {
-	controller->endTurn();
+	scene->clearSelection();
 	ui->groupBoxAction->setEnabled(false);
+	ui->stackedWidget->setCurrentIndex(0);
+	controller->endTurn();
+	turnNumber++;
+	ui->groupBoxView->setTitle(QString("Turn number : %1").arg(turnNumber));
 }
 
 void ViewInterface::actionNextUnit()
 {
-
+	// TODO
 }
 
 void ViewInterface::actionPrevUnit()
 {
-
+	// TODO
 }
 
 void ViewInterface::newTurn()
@@ -147,7 +156,40 @@ void ViewInterface::newTurn()
 
 void ViewInterface::unitSelected()
 {
+	QList<QGraphicsItem*> items = scene->selectedItems();
+	if(items.size() == 0)
+	{
+		selected = 0;
+		ui->stackedWidget->setCurrentIndex(0);
+	}
+	else if(items.size() == 1)
+	{
+		selected = items.at(0)->data(0).toInt();
+		if(selected == 0)
+			return;
 
+		QString type;
+		QVector<QPair<QString,int>> transported;
+		controller->getInfo(selected, type, transported);
+		showInformations(type, transported);
+	}
+}
+
+void ViewInterface::selectedInList(QModelIndex index)
+{
+	selected = selectedTransported[index.row()];
+	if(selected == 0)
+		return;
+
+	QString type;
+	QVector<QPair<QString,int>> transported;
+	controller->getInfo(selected, type, transported);
+	showInformations(type, transported);
+}
+
+void ViewInterface::productUnit()
+{
+	controller->setProduction(selected, ui->unitTypeCombo->currentText());
 }
 
 
@@ -160,8 +202,27 @@ QPointF ViewInterface::toGraphicsCoordinates(int x, int y)
 	return QPointF(x*hHex+y*0.5*hHex, y*wHex);
 }
 
-void ViewInterface::showInformations()
+void ViewInterface::showInformations(QString type, QVector<QPair<QString,int>> transported)
 {
-
+	QListWidget* listTransported;
+	if(type == "CITY")
+	{
+		ui->stackedWidget->setCurrentIndex(2);
+		listTransported = ui->listInCity;
+	}
+	else
+	{
+		ui->stackedWidget->setCurrentIndex(1);
+		ui->labelUnit->setText("Unit type : " + type);
+		listTransported = ui->listTransported;
+	}
+	listTransported->clear();
+	selectedTransported.clear();
+	for(QVector<QPair<QString,int> >::iterator it = transported.begin();
+		it != transported.end(); it++)
+	{
+		listTransported->addItem(it->first);
+		selectedTransported.push_back(it->second);
+	}
 }
 

@@ -6,7 +6,6 @@
 #include "model/tile.hpp"
 #include "model/piece.hpp"
 #include <QMessageBox>
-#include <iostream>
 
 
 MainController::MainController(ViewInterface *view, NetworkController *net, QObject *parent) :
@@ -31,14 +30,51 @@ bool MainController::getObserverMode()
 	return observerMode;
 }
 
+void MainController::getInfo(int id, QString& type, QVector<QPair<QString, int> >& transported)
+{
+	Piece* p = model->getPiece(id);
+	if(p == 0)
+		return;
+	type = typeToString(p->getType());
+	QSet<Piece*> pieces = p->getTransported();
+	for(QSet<Piece*>::iterator it = pieces.begin(); it != pieces.end(); it++)
+	{
+		int t = (*it)->getType();
+		int i = (*it)->getId();
+		transported.push_back(QPair<QString,int>(typeToString(t), i));
+	}
+}
+
 void MainController::endTurn()
 {
 	networkCtrlr->sendMessageToServer("end_turn\n");
 }
 
-void MainController::movePiece()
+void MainController::movePiece(int id, QString direction)
 {
+	int dir2;
+	if(direction == "NE")
+		dir2 = 1;
+	else if(direction == "NW")
+		dir2 = 2;
+	else if(direction == "E")
+		dir2 = 6;
+	else if(direction == "W")
+		dir2 = 3;
+	else if(direction == "SE")
+		dir2 = 5;
+	else if(direction == "SW")
+		dir2 = 4;
+	else
+		return;
 
+	networkCtrlr->sendMessageToServer(QString("move %1 %2\n").arg(id).arg(dir2));
+}
+
+void MainController::setProduction(int idCity, QString type)
+{
+	networkCtrlr->sendMessageToServer(QString("set_city_production %1 %2\n")
+									  .arg(idCity).arg(stringToType(type)));
 }
 
 void MainController::processMessage(QString message)
@@ -46,7 +82,6 @@ void MainController::processMessage(QString message)
 	QStringList l = message.split(' ');
 
 	QString command = l.at(0);
-	std::cout << message.toStdString() << std::endl;
 
 	// Inital configuration
 	if(command == "width")
@@ -111,6 +146,11 @@ void MainController::processMessage(QString message)
 		Piece* p = new Piece(id, type, owner);
 		model->addPiece(id, p);
 		model->getPiece(cityId)->addTransported(p);
+		if(!observerMode)
+		{
+			QMessageBox::information(0, "Game message",
+						QString("New piece created : %1").arg(typeToString(type)));
+		}
 
 	}
 	else if(command == "enter_piece" || command == "enter_city")
@@ -170,17 +210,57 @@ void MainController::processMessage(QString message)
 			emit gameEnd(false);
 		}
 	}
+	else if(command == "get_action")
+	{
+		viewInterface->newTurn();
+	}
 	// Errors
 	else if(command == "error")
 	{
 		emit gameError(message.right(7));
-		//QMessageBox::information(0, "Game error", message);
+		QMessageBox::information(0, "Game error", message);
 	}
 }
 
 void MainController::disconnected()
 {
-	// TODO : clear view and model
+	viewInterface->clearView();
+	model->clear();
+}
+
+QString MainController::typeToString(int type)
+{
+	switch (type) {
+		case Piece::CITY:
+			return QString("CITY");
+		case Piece::ARMY:
+			return QString("ARMY");
+		case Piece::FIGHT:
+			return QString("FIGHT");
+		case Piece::TRANSPORT:
+			return QString("TRANSPORT");
+		case Piece::PATROL:
+			return QString("PATROL");
+		case Piece::BATTLESHIP:
+			return QString("BATTLESHIP");
+	}
+	return QString();
+}
+
+int MainController::stringToType(QString type)
+{
+	if(type == "ARMY")
+		return Piece::ARMY;
+	else if(type == "FIGHT")
+		return Piece::FIGHT;
+	else if(type == "TRANSPORT")
+		return Piece::TRANSPORT;
+	else if(type == "PATROL")
+		return Piece::PATROL;
+	else if(type == "BATTLESHIP")
+		return Piece::BATTLESHIP;
+	else
+		return Piece::CITY;
 }
 
 void MainController::createTile(int x, int y, QString type, bool visible)
@@ -255,19 +335,19 @@ void MainController::createUnit(int x, int y, int id, int owner, int type)
 	Unit::Type tu;
 	QColor c = (owner==0)? Qt::yellow : Qt::red;
 	switch (type) {
-		case 0:
+		case Piece::ARMY:
 			tu = Unit::ARMY;
 			break;
-		case 1:
+		case Piece::FIGHT:
 			tu = Unit::FIGHT;
 			break;
-		case 2:
+		case Piece::TRANSPORT:
 			tu = Unit::TRANSPORT;
 			break;
-		case 3:
+		case Piece::PATROL:
 			tu = Unit::PATROL;
 			break;
-		case 4:
+		case Piece::BATTLESHIP:
 			tu = Unit::BATTLESHIP;
 			break;
 	}

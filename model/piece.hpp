@@ -8,8 +8,8 @@ class Piece
 {
 	public:
 		enum Type {
-			FIGHT = 0,
-			ARMY = 1,
+			ARMY = 0,
+			FIGHT = 1,
 			TRANSPORT = 2,
 			PATROL = 3,
 			BATTLESHIP = 4,
@@ -26,7 +26,7 @@ class Piece
 		void* getGraphicsObject();
 		void addTransported(Piece* transported);
 		void removeTransported(Piece* transported);
-		QSet<Piece*> getTransported();
+		QSet<Piece*>& getTransported();
 
 
 	private:

@@ -40,3 +40,6 @@ HEADERS  += mainwindow.hpp \
     graphics/graphicsobject.hpp
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    images.qrc

@@ -2,6 +2,8 @@
 #define MAINCONTROLLER_HPP
 
 #include <QObject>
+#include <QVector>
+#include <QPair>
 
 
 class GameModel;
@@ -17,8 +19,10 @@ class MainController : public QObject
 
 		void setObserverMode(bool enabled);
 		bool getObserverMode();
+		void getInfo(int id, QString& type, QVector<QPair<QString,int>>& transported);
 		void endTurn();
-		void movePiece();
+		void movePiece(int id, QString direction);
+		void setProduction(int idCity, QString type);
 
 	signals:
 		void sendMessage(QString message);
@@ -30,6 +34,8 @@ class MainController : public QObject
 		void disconnected();
 
 	private:
+		QString typeToString(int type);
+		int stringToType(QString type);
 		void createTile(int x, int y, QString type, bool visible);
 		void createCity(int x, int y, int id, int owner);
 		void createUnit(int x, int y, int id, int owner, int type);
