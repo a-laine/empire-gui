@@ -56,11 +56,11 @@ Hexagon* ViewInterface::createHexagon(int x, int y, Hexagon::Type type)
 	return hex;
 }
 
-Unit* ViewInterface::createUnit(int x, int y, int id, Unit::Type type, QColor color)
+Unit* ViewInterface::createUnit(int x, int y, int id, Unit::Type type, int team)
 {
 	QPointF pos = toGraphicsCoordinates(x, y);
 	Unit *unit = new Unit(pos, id);
-	unit->setColor(color);
+	unit->setTeam(team);
 	unit->setType(type);
 	scene->addItem(unit->getGraphicsItem());
 	objectList.insert(unit);

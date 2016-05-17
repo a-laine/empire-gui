@@ -13,6 +13,7 @@ class Unit : public GraphicsObject
 {
 	public:
 		enum Type {
+			NOTHING,
 			CITY,
 			FIGHT,
 			ARMY,
@@ -25,15 +26,16 @@ class Unit : public GraphicsObject
 		Unit(QPointF pos, int id, QGraphicsItem *parent = 0);
 		~Unit();
 
-		void setType(Type type);
-		void setColor(QColor color);
+		void setType(Type t);
+		void setTeam(int t);
 		QGraphicsItem* getGraphicsItem();
 
 	private:
-		QGraphicsItemGroup *item;
-		QGraphicsRectItem *rect;
-		QGraphicsSimpleTextItem *text;
+		QGraphicsPixmapItem *item;
 		int unitId;
+		int team;
+		Type type;
+		void setImage();
 };
 
 #endif // UNIT_HPP

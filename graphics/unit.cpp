@@ -2,26 +2,18 @@
 
 #include <QBrush>
 #include <QFont>
+#include <QMessageBox>
 
 
 Unit::Unit(QPointF pos, int id, QGraphicsItem *parent) :
-	item(new QGraphicsItemGroup(parent)),
-	rect(new QGraphicsRectItem(0)),
-	text(new QGraphicsSimpleTextItem(0)),
-	unitId(id)
+	item(new QGraphicsPixmapItem(parent)),
+	unitId(id),
+	team(-2),
+	type(NOTHING)
 {
-	item->addToGroup(rect);
+	item->setPos(QPoint(pos.x()-32, pos.y()-32));
 	item->setFlag(QGraphicsItem::ItemIsSelectable);
 	item->setData(0, id);
-	rect->setPos(0,0);
-	rect->setRect(-25,-25,50,50);
-
-	item->addToGroup(text);
-	text->setPos(-15,-29);
-	text->setFont(QFont("monospace", 40, 100));
-	text->setBrush(QBrush(Qt::black));
-
-	item->setPos(pos);
 }
 
 Unit::~Unit()
@@ -29,38 +21,56 @@ Unit::~Unit()
 	delete item;
 }
 
-void Unit::setType(Unit::Type type)
+void Unit::setType(Unit::Type t)
 {
-	switch (type) {
-		case CITY:
-			text->setText("O");
-			break;
-		case FIGHT:
-			text->setText("F");
-			break;
-		case ARMY:
-			text->setText("A");
-			break;
-		case TRANSPORT:
-			text->setText("T");
-			break;
-		case PATROL:
-			text->setText("P");
-			break;
-		case BATTLESHIP:
-			text->setText("B");
-			break;
-		default:
-			break;
-	}
+	type = t;
+	if(team != -2)
+		setImage();
 }
 
-void Unit::setColor(QColor color)
+void Unit::setTeam(int t)
 {
-	rect->setBrush(QBrush(color));
+	team = t;
+	if(type != NOTHING)
+		setImage();
 }
 
 QGraphicsItem* Unit::getGraphicsItem()
 {
 	return item;
+}
+
+void Unit::setImage()
+{
+	QString name = ":/ressources/";
+	switch (type) {
+		case CITY:
+			name += "TOWN";
+			break;
+		case FIGHT:
+			name += "FIGHT";
+			break;
+		case ARMY:
+			name += "ARMY";
+			break;
+		case TRANSPORT:
+			name += "TRANSPORT";
+			break;
+		case PATROL:
+			name += "PATROL";
+			break;
+		case BATTLESHIP:
+			name += "BATTLESHIP";
+			break;
+		default:
+			break;
+	}
+	if(team == 0)
+		name += " blue.png";
+	else if(team == 1)
+		name += " red.png";
+	else
+		name += " neutral.png";
+
+	item->setPixmap(QPixmap(name));
 }

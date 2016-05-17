@@ -298,22 +298,7 @@ void MainController::createTile(int x, int y, QString type, bool visible)
 
 void MainController::createCity(int x, int y, int id, int owner)
 {
-
-	QColor color;
-	switch (owner) {
-		case -1:
-			color = Qt::white;
-			break;
-		case 0:
-			color = Qt::yellow;
-			break;
-		case 1:
-			color = Qt::red;
-			break;
-		default:
-			break;
-	}
-	Unit* u1 = viewInterface->createUnit(x, y, id, Unit::CITY, color);
+	Unit* u1 = viewInterface->createUnit(x, y, id, Unit::CITY, owner);
 	if(model->getPiece(id) == 0)
 	{
 		Piece* p = new Piece(id, Piece::CITY, owner);
@@ -333,7 +318,6 @@ void MainController::createCity(int x, int y, int id, int owner)
 void MainController::createUnit(int x, int y, int id, int owner, int type)
 {
 	Unit::Type tu;
-	QColor c = (owner==0)? Qt::yellow : Qt::red;
 	switch (type) {
 		case Piece::ARMY:
 			tu = Unit::ARMY;
@@ -351,7 +335,7 @@ void MainController::createUnit(int x, int y, int id, int owner, int type)
 			tu = Unit::BATTLESHIP;
 			break;
 	}
-	Unit* u1 = viewInterface->createUnit(x, y, id, tu, c);
+	Unit* u1 = viewInterface->createUnit(x, y, id, tu, owner);
 	if(model->getPiece(id) == 0)
 	{
 		Piece* p = new Piece(id, type, owner);

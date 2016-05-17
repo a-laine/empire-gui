@@ -47,7 +47,7 @@ class ViewInterface : public QObject
 		 * and with the given colour.
 		 * Ownership is kept by this class.
 		 */
-		Unit* createUnit(int x, int y, int id, Unit::Type type, QColor color);
+		Unit* createUnit(int x, int y, int id, Unit::Type type, int team);
 
 		/*!
 		 * \brief Move the unit to the given coordinates.

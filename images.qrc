@@ -1,19 +1,19 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources/ARMY blue.png</file>
-        <file>resources/ARMY red.png</file>
-        <file>resources/BATTLESHIP bue.png</file>
-        <file>resources/BATTLESHIP red.png</file>
-        <file>resources/FIGHT bleu.png</file>
-        <file>resources/FIGHT red.png</file>
-        <file>resources/PATROL blue.png</file>
-        <file>resources/PATROL red.png</file>
-        <file>resources/PONY blue.png</file>
-        <file>resources/PONY red.png</file>
-        <file>resources/TOWN blue.png</file>
-        <file>resources/TOWN neutral.png</file>
-        <file>resources/TOWN red.png</file>
-        <file>resources/TRANSPORT blue.png</file>
-        <file>resources/TRANSPORT red.png</file>
+        <file>ressources/ARMY blue.png</file>
+        <file>ressources/ARMY red.png</file>
+        <file>ressources/BATTLESHIP bue.png</file>
+        <file>ressources/BATTLESHIP red.png</file>
+        <file>ressources/FIGHT bleu.png</file>
+        <file>ressources/FIGHT red.png</file>
+        <file>ressources/PATROL blue.png</file>
+        <file>ressources/PATROL red.png</file>
+        <file>ressources/PONY blue.png</file>
+        <file>ressources/PONY red.png</file>
+        <file>ressources/TOWN blue.png</file>
+        <file>ressources/TOWN neutral.png</file>
+        <file>ressources/TOWN red.png</file>
+        <file>ressources/TRANSPORT blue.png</file>
+        <file>ressources/TRANSPORT red.png</file>
     </qresource>
 </RCC>

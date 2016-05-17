@@ -6,12 +6,12 @@
 
 QPointF Hexagon::getHorizontalSize()
 {
-	return QPointF(25*0.866*4.0, 25*4.0);
+	return QPointF(72*0.866, 72);
 }
 
 QPointF Hexagon::getVerticalSize()
 {
-	return QPointF(25*4.0, 25*0.866*4.0);
+	return QPointF(72, 72*0.866);
 }
 
 
@@ -80,7 +80,7 @@ void Hexagon::setVisible(bool visible)
 	if(visible)
 		item->setOpacity(1);
 	else
-		item->setOpacity(0.25);
+		item->setOpacity(0.30);
 }
 
 QGraphicsItem* Hexagon::getGraphicsItem()
