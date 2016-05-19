@@ -20,4 +20,6 @@ void GraphicsView::wheelEvent(QWheelEvent* event)
 		setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 		scale(ratio, ratio);
 	}
+	else
+		QGraphicsView::wheelEvent(event);
 }
