@@ -68,12 +68,16 @@ Unit* ViewInterface::createUnit(int x, int y, int id, Unit::Type type, int team)
 
 void ViewInterface::move(Unit* unit, int x, int y)
 {
+	if(unit == 0)
+		return;
 	QPointF pos = toGraphicsCoordinates(x, y);
 	unit->getGraphicsItem()->setPos(pos);
 }
 
 void ViewInterface::remove(Unit* unit)
 {
+	if(unit == 0)
+		return;
 	scene->removeItem(unit->getGraphicsItem());
 	delete unit;
 	objectList.remove(unit);
@@ -81,6 +85,8 @@ void ViewInterface::remove(Unit* unit)
 
 void ViewInterface::remove(Hexagon* hexagon)
 {
+	if(hexagon == 0)
+		return;
 	scene->removeItem(hexagon->getGraphicsItem());
 	delete hexagon;
 	objectList.remove(hexagon);

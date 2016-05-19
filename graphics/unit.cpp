@@ -6,14 +6,19 @@
 
 
 Unit::Unit(QPointF pos, int id, QGraphicsItem *parent) :
-	item(new QGraphicsPixmapItem(parent)),
+	item(new QGraphicsItemGroup(parent)),
+	image(new QGraphicsPixmapItem),
 	unitId(id),
 	team(-2),
 	type(NOTHING)
 {
-	item->setPos(QPoint(pos.x()-32, pos.y()-32));
+	item->setPos(pos);
+	item->addToGroup(image);
 	item->setFlag(QGraphicsItem::ItemIsSelectable);
 	item->setData(0, id);
+	item->setZValue(10);
+
+	image->setPos(-32,-32);
 }
 
 Unit::~Unit()
@@ -72,5 +77,5 @@ void Unit::setImage()
 	else
 		name += " neutral.png";
 
-	item->setPixmap(QPixmap(name));
+	image->setPixmap(QPixmap(name));
 }

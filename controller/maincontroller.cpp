@@ -155,9 +155,13 @@ void MainController::processMessage(QString message)
 	}
 	else if(command == "enter_piece" || command == "enter_city")
 	{
+
 		int pieceId = l.at(1).toInt();
 		int containerId = l.at(2).toInt();
-		model->getPiece(containerId)->addTransported(model->getPiece(pieceId));
+		Piece *p = model->getPiece(pieceId);
+		model->getPiece(containerId)->addTransported(p);
+		viewInterface->remove((Unit*) p->getGraphicsObject());
+		p->setGraphicsObject(0);
 	}
 	else if(command == "leave_piece" || command == "leave_city")
 	{
@@ -335,20 +339,26 @@ void MainController::createUnit(int x, int y, int id, int owner, int type)
 			tu = Unit::BATTLESHIP;
 			break;
 	}
-	Unit* u1 = viewInterface->createUnit(x, y, id, tu, owner);
 	if(model->getPiece(id) == 0)
 	{
+		Unit* u = viewInterface->createUnit(x, y, id, tu, owner);
 		Piece* p = new Piece(id, type, owner);
-		p->setGraphicsObject(u1);
+		p->setGraphicsObject(u);
 		model->addPiece(id, p);
 	}
 	else
 	{
 		Piece* p = model->getPiece(id);
 		Unit* u2 = (Unit*) p->getGraphicsObject();
-		if(u2 != 0)
-			viewInterface->remove(u2);
-		p->setGraphicsObject(u1);
+		if(u2 == 0)
+		{
+			Unit* u = viewInterface->createUnit(x, y, id, tu, owner);
+			p->setGraphicsObject(u);
+		}
+		else
+		{
+			viewInterface->move(u2,x,y);
+		}
 	}
 }
 

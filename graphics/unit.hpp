@@ -31,7 +31,8 @@ class Unit : public GraphicsObject
 		QGraphicsItem* getGraphicsItem();
 
 	private:
-		QGraphicsPixmapItem *item;
+		QGraphicsItemGroup *item;
+		QGraphicsPixmapItem *image;
 		int unitId;
 		int team;
 		Type type;
