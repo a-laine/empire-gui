@@ -80,24 +80,6 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QPushButton" name="prevUnitButton">
-            <property name="text">
-             <string>prev. movable</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="nextUnitButton">
-            <property name="text">
-             <string>next movable</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
          <widget class="QStackedWidget" name="stackedWidget">
           <property name="enabled">
            <bool>true</bool>
@@ -259,7 +241,6 @@
    </widget>
    <addaction name="menuMenu"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionObserver_Mode">
    <property name="checkable">
     <bool>true</bool>

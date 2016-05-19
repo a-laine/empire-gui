@@ -16,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	// ui
 	ui->setupUi(this);
-	ui->statusBar->addWidget(statusMessage);
 
 	//Scene
 	ui->graphicsView->setScene(scene);

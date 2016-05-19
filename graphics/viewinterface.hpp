@@ -81,8 +81,6 @@ class ViewInterface : public QObject
 		void actionMoveSE();
 		void actionMoveSW();
 		void actionEndTurn();
-		void actionNextUnit();
-		void actionPrevUnit();
 		void newTurn();
 		void unitSelected();
 		void selectedInList(QModelIndex index);

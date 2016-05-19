@@ -28,8 +28,6 @@ void ViewInterface::setController(MainController* ctrlr)
 	connect(ui->moveSW, SIGNAL(pressed()), this, SLOT(actionMoveSW()));
 	connect(ui->moveW,  SIGNAL(pressed()), this, SLOT(actionMoveW()));
 	connect(ui->endTurnButton, SIGNAL(pressed()), this, SLOT(actionEndTurn()));
-	connect(ui->nextUnitButton, SIGNAL(pressed()), this, SLOT(actionNextUnit()));
-	connect(ui->prevUnitButton, SIGNAL(pressed()), this, SLOT(actionPrevUnit()));
 	connect(ui->listTransported, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectedInList(QModelIndex)));
 	connect(ui->listInCity, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectedInList(QModelIndex)));
 	connect(ui->productButton, SIGNAL(pressed()), this, SLOT(productUnit()));
@@ -137,16 +135,6 @@ void ViewInterface::actionEndTurn()
 	controller->endTurn();
 	turnNumber++;
 	ui->groupBoxView->setTitle(QString("Turn number : %1").arg(turnNumber));
-}
-
-void ViewInterface::actionNextUnit()
-{
-	// TODO
-}
-
-void ViewInterface::actionPrevUnit()
-{
-	// TODO
 }
 
 void ViewInterface::newTurn()

@@ -2,9 +2,7 @@
     <qresource prefix="/">
         <file>ressources/ARMY blue.png</file>
         <file>ressources/ARMY red.png</file>
-        <file>ressources/BATTLESHIP bue.png</file>
         <file>ressources/BATTLESHIP red.png</file>
-        <file>ressources/FIGHT bleu.png</file>
         <file>ressources/FIGHT red.png</file>
         <file>ressources/PATROL blue.png</file>
         <file>ressources/PATROL red.png</file>
@@ -15,5 +13,7 @@
         <file>ressources/TOWN red.png</file>
         <file>ressources/TRANSPORT blue.png</file>
         <file>ressources/TRANSPORT red.png</file>
+        <file>ressources/BATTLESHIP blue.png</file>
+        <file>ressources/FIGHT blue.png</file>
     </qresource>
 </RCC>
